@@ -1,0 +1,57 @@
+version: "3"
+
+services:
+  nginx:
+    build: requirements/nginx
+    image: nginx
+    container_name: nginx
+    ports:
+      - 443:443
+    depends_on:
+      - wordpress
+    networks:
+      - mokellat_network
+    volumes:
+      - wordpress:/var/www/html
+    env_file: .env
+
+  mariadb:
+    build: requirements/mariadb
+    image: mariadb
+    container_name: mariadb
+    ports:
+      - 3306
+    env_file: .env
+    volumes:
+      - db:/var/lib/mysql
+    networks:
+      - mokellat_network
+
+  wordpress:
+    build: requirements/wordpress
+    image: wordpress
+    container_name: wordpress
+    ports:
+      - 9000
+    depends_on:
+      - mariadb
+    env_file: .env
+    volumes:
+      - wordpress:/var/www/html
+    networks:
+      - mokellat_network
+
+networks:
+  mokellat_network:
+
+volumes:
+  wordpress:
+    driver_opts:
+      type: none
+      device: /home/mokellat/data/wp-files
+      o: bind
+  db:
+    driver_opts:
+      type: none
+      device: /home/mokellat/data/wp-db
+      o: bind
