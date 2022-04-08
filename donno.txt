@@ -1,0 +1,20 @@
+hade l9lawi d docker permission denied
+
+-sudo chmod 666 /var/run/docker.sock
+
+Mariadb part
+
+1. what we changed in 50-server.cnf
+2. mariadb_conf.sh still need some revision
+
+
+Nginx part
+
+1. utils there
+2. ssl certificates
+
+wordpress part
+
+1.tf is www.conf
+
+docker compose
