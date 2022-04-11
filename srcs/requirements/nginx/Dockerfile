@@ -1,5 +1,5 @@
 FROM debian:buster
-# EXPOSE 80 443
+EXPOSE 443
 RUN apt update
 RUN apt install nginx -y
 RUN mkdir conf
